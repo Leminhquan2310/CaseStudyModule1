@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #89f7fe, #66a6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.auth-container {
+  background-color: #fff;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+  margin-bottom: 24px;
+  text-align: center;
+  color: #333;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container input {
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.auth-container input:focus {
+  border-color: #66a6ff;
+}
+
+.auth-container button {
+  padding: 12px;
+  background: #66a6ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.auth-container button:hover {
+  background: #4d8aff;
+}
+
+.auth-container .switch-link {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-container .switch-link a {
+  color: #4d8aff;
+  text-decoration: none;
+}
+
+.auth-container .switch-link a:hover {
+  text-decoration: underline;
+}
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+  margin: 0 8px;
+  accent-color: #66a6ff; /* màu xanh như nút Đăng nhập */
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}

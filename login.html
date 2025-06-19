@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <h2>SIGN IN</h2>
+      <form id="loginForm" onsubmit="loginToApp(event)">
+        <input type="username" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <label class="remember-me">
+          <input type="checkbox" id="remember" />
+          Remember me
+        </label>
+        <button type="submit">Sign In</button>
+      </form>
+      <div class="switch-link">Don't have an account? <a href="register.html">Sign up</a></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/service/AccountService.js"></script>
+    <script src="js/utils/MyStorage.js"></script>
+    <script src="js/view/auth/auth.js"></script>
+  </body>
+</html>

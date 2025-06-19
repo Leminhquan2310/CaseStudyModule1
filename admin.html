@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Study: Quản Lý Shop Thời Trang</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="admin-user-info">
+          <img id="avatarAdmin" src="" alt="Admin Avatar" class="avatar" />
+          <span id="nameAdmin" class="username">Admin</span>
+          <div class="dropdown">
+            <button class="dropdown-btn"><i class="fa-solid fa-caret-down"></i></button>
+            <div class="dropdown-content">
+              <a onclick="showProfile()">Profile</a>
+            </div>
+          </div>
+        </div>
+        <ul id="menu">
+          <li><a>Dashboard</a></li>
+          <li><a class="active" onclick="showProductManage(event)">Product</a></li>
+          <li><a onclick="showCategoryManage(event)">Category</a></li>
+          <li><a onclick="showBrandManage(event)">Brand</a></li>
+        </ul>
+      </aside>
+      <main id="main-content" class="main-content"></main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/utils/component.js"></script>
+    <script src="js/model/Brand.js"></script>
+    <script src="js/model/Category.js"></script>
+    <script src="js/model/Product.js"></script>
+    <script src="js/utils/MyStorage.js"></script>
+    <script src="js/service/AccountService.js"></script>
+    <script src="js/service/ProductService.js"></script>
+    <script src="js/service/BrandService.js"></script>
+    <script src="js/service/CategoryService.js"></script>
+    <script src="js/view/admin/product.js"></script>
+    <script src="js/view/admin/category.js"></script>
+    <script src="js/view/admin/brand.js"></script>
+    <script src="js/view/admin/profile.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

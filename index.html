@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Shop</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <h1 class="logo" onclick="showHomePage()">MyShop</h1>
+      <div class="nav-right">
+        <div class="cart-icon" onclick="showCartPage()">
+          🛒 <span>Cart(<span id="quantityCart">0</span>)</span>
+        </div>
+        <div class="profile" onclick="showProfileUser()">
+          <img id="avatar_user" src="" alt="Avatar user" />
+          <span id="username_user" class="username"></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Danh sách sản phẩm -->
+    <section class="product-list" id="main_content"></section>
+
+    <!-- ---------- script -------------------- -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/utils/MyStorage.js"></script>
+    <script src="js/utils/component.js"></script>
+    <script src="js/model/Cart.js"></script>
+    <script src="js/model/Order.js"></script>
+    <script src="js/service/ProductService.js"></script>
+    <script src="js/service/CategoryService.js"></script>
+    <script src="js/service/BrandService.js"></script>
+    <script src="js/service/AccountService.js"></script>
+    <script src="js/service/CartService.js"></script>
+    <script src="js/service/OrderService.js"></script>
+    <script src="js/view/user/home.js"></script>
+    <script src="js/view/user/cart.js"></script>
+    <script src="js/view/user/bill.js"></script>
+    <script src="js/view/user/profile.js"></script>
+  </body>
+</html>

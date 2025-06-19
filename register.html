@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <h2>SIGN UP</h2>
+      <form id="registerForm" onsubmit="registerAccount(event)">
+        <input id="fullname" type="text" placeholder="Fullname" required />
+        <input id="username" type="username" placeholder="Username" required />
+        <input id="password" type="password" placeholder="Password" required />
+        <input id="confirmPassword" type="password" placeholder="Confirm password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="switch-link">Already have an account? <a href="login.html">Sign In</a></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/utils/component.js"></script>
+    <script src="js/utils/MyStorage.js"></script>
+    <script src="js/model/Account.js"></script>
+    <script src="js/service/AccountService.js"></script>
+    <script src="js/view/auth/auth.js"></script>
+  </body>
+</html>
