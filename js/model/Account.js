@@ -6,5 +6,7 @@ class Account {
     this.fullname = fullname;
     this.role = role;
     this.avatar = null;
+    this.phoneNumber = "";
+    this.address = "";
   }
 }

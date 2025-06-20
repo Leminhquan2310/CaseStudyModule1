@@ -1,6 +1,7 @@
 const showCartPage = () => {
   let yourCart = cartStore.getProductCart(account.id);
-  let html = `<section class="cart-items" id="cart-items">`;
+  let html = `<section class="product-list">
+  <section class="cart-items" id="cart-items">`;
 
   yourCart.listProductCart.map((item) => {
     html += `
@@ -25,14 +26,15 @@ const showCartPage = () => {
       <button ${
         yourCart.listProductCart.length == 0 && "disabled"
       } class="checkout-btn" onclick="payment()">Checkout</button>
-    </aside>`;
+    </aside>
+    </section>`;
   document.getElementById("main_content").innerHTML = html;
 };
 
 const removeProductInCart = (id) => {
   cartStore.deleteProduct(account.id, id);
   showCartPage();
-  updateQuantityCart();
+  updateNavMenu();
 };
 
 const payment = () => {
@@ -52,7 +54,7 @@ const payment = () => {
   );
   orderStore.createOrder(order);
   cartStore.clearCart(account.id);
-  updateQuantityCart();
+  updateNavMenu();
   idBill = id;
   showNotifySuccess(showOrderPay, "Checkout success");
 };

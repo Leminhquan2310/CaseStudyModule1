@@ -13,4 +13,8 @@ class OrderService {
   getOrderById(id) {
     return this.listOrder.find((item) => item.id === id);
   }
+
+  getOrdersByAccountID(accountId) {
+    return this.listOrder.filter((item) => item.accountId === accountId);
+  }
 }

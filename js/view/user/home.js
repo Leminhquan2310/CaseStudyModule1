@@ -6,7 +6,7 @@ let idBill = "";
 
 const showHomePage = () => {
   let list = productStore.readProduct();
-  let html = ``;
+  let html = `<section class="product-list">`;
   list.map((item) => {
     html += `<div class="product-card">
         <img src="${item.image}" alt="${item.name}" />
@@ -17,33 +17,32 @@ const showHomePage = () => {
         <button class="btn_add_cart" onclick="add_to_cart('${item.id}')">Add to cart</button>
       </div>`;
   });
+  html += `</section>`;
   document.getElementById("main_content").innerHTML = html;
 };
 
 const add_to_cart = (id) => {
   cartStore.updateAddProduct(account.id, id);
-  updateQuantityCart();
+  updateNavMenu();
 };
 
-const updateQuantityCart = () => {
-  let cart = cartStore.getCartByAccount(account.id);
-  document.getElementById("quantityCart").innerHTML = cart.listProduct.length;
+const updateNavMenu = () => {
+  account = accountStore.getAccount(auth.id);
+  if (account.role === 1) {
+    let cart = cartStore.getCartByAccount(account.id);
+    document.getElementById("quantityCart").innerHTML = cart.listProduct.length;
+    document.getElementById("avatar_user").src = account.avatar || "/asset/userDefault.png";
+    document.getElementById("username_user").innerHTML = account.username;
+  } else {
+    window.location.href = "/admin.html";
+  }
 };
 
 // check các kiểu
 let auth = accountStore.getAuth();
 let account;
 if (auth) {
-  account = accountStore.getAccount(auth.id);
-  if (account.role === 1) {
-    // thay image, username cuar account
-    document.getElementById("avatar_user").src = account.image || "/asset/userDefault.png";
-    document.getElementById("username_user").innerHTML = account.username;
-
-    updateQuantityCart();
-  } else {
-    window.location.href = "/admin.html";
-  }
+  updateNavMenu();
 } else {
   window.location.href = "/login.html";
 }

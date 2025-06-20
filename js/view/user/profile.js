@@ -1,79 +1,143 @@
 const showProfileUser = () => {
   let html = `<!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="avatar-section">
-        <img src="https://i.pravatar.cc/100?img=3" alt="Avatar" class="avatar" />
-        <h3>Nguyễn Văn A</h3>
-      </div>
-      <nav class="nav">
-        <button class="nav-item active" onclick="showTab(event, 'profile')">👤 Thông tin cá nhân</button>
-        <button class="nav-item" onclick="showTab(event, 'orders')">📦 Lịch sử đơn hàng</button>
-      </nav>
-    </aside>
+    <div class="profile_container">
+        <aside class="sidebar">
+          <div class="avatar-container">
+            <img id="avatar" src="${
+              account.avatar || "/asset/userDefault.png"
+            }" alt="avatar" class="avatar" />
+            <div class="overlay" onclick="chooseFile()">
+              <label>
+                <i class="fa fa-camera"></i>
+              </label>
+              <input type="file" id="file-upload" onchange="changeAvatar(event)" style="display: none" />
+            </div>
+            </div>
+            <h3 style="margin-bottom: 10px">${account.fullname}</h3>
+          <nav class="nav">
+            <button class="nav-item active" onclick="showTab(event, 'profile')">👤 Your Profile</button>
+            <button class="nav-item" onclick="showTab(event, 'order')">📦 Orders History</button>
+            <button class="nav-item-logout" onclick="logout()">🔚 Logout</button>
+          </nav>
+        </aside>
+    
+        <!-- Main content -->
+        <main id="main_profile" class="main-content">
+        </main>
+    </div>`;
 
-    <!-- Main content -->
-    <main class="main-content">
-      <!-- Tab 1: Profile -->
-      <section id="profile" class="tab active">
-        <h2>Thông Tin Cá Nhân</h2>
+  document.getElementById("main_content").innerHTML = html;
+  showProfile();
+};
+
+const showProfile = () => {
+  let info = accountStore.getAccount(account.id);
+  let html = `<section>
+        <h2>Your Profile</h2>
         <div class="profile-info">
-          <p><strong>Họ tên:</strong> Nguyễn Văn A</p>
-          <p><strong>Email:</strong> nguyenvana@email.com</p>
-          <p><strong>Số điện thoại:</strong> 0909 999 999</p>
-          <p><strong>Địa chỉ:</strong> 123 Lê Lợi, TP. Hồ Chí Minh</p>
+          <p><strong>Username:</strong> ${info.username}</p>
+          <p><strong>phoneNumber:</strong> <input class="input-basic" id="phone" type="text" value="${
+            info.phoneNumber || ""
+          }" /></p>
+          <p><strong>address:</strong> <input class="input-basic" id="address" type="text" value="${
+            info.address || ""
+          }" /></p>
         </div>
-      </section>
+        <button class="btn_change_info" onclick="saveInformation()">Save</button>
+      </section>`;
+  document.getElementById("main_profile").innerHTML = html;
+};
 
-      <!-- Tab 2: Orders -->
-      <section id="orders" class="tab">
-        <h2>Lịch Sử Đơn Hàng</h2>
+const showOrderList = () => {
+  let orders = orderStore.getOrdersByAccountID(account.id);
+  let html = `<section id="orders">
+        <h2>Order History</h2>
         <div class="order-list">
           <table>
             <thead>
               <tr>
                 <th>#</th>
-                <th>Mã đơn</th>
-                <th>Ngày đặt</th>
-                <th>Tổng tiền</th>
-                <th>Trạng thái</th>
+                <th>Code order</th>
+                <th>Date</th>
+                <th>Total Price</th>
+                <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>ORD001</td>
-                <td>19/06/2025</td>
-                <td>1.200.000₫</td>
-                <td><span class="badge success">Đã giao</span></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>ORD002</td>
-                <td>15/06/2025</td>
-                <td>870.000₫</td>
-                <td><span class="badge pending">Đang xử lý</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>`;
-
-  document.getElementById("main_content").innerHTML = html;
+            <tbody>`;
+  orders
+    .map((item, index) => {
+      html += `<tr>
+                <td>${index + 1}</td>
+                <td>${item.id}</td>
+                <td>${item.createdAt}</td>
+                <td>$${item.totalAmount}</td>
+                <td><span class="badge success">${item.status}</span></td>
+              </tr>`;
+    })
+    .join("");
+  html += `</tbody></table></div></section>`;
+  document.getElementById("main_profile").innerHTML = html;
 };
 
-function showTab(event, tabId) {
-  // Ẩn tất cả tab
-  document.querySelectorAll(".tab").forEach((tab) => {
-    tab.classList.remove("active");
-  });
-
-  // Hiện tab được chọn
-  document.getElementById(tabId).classList.add("active");
-
+const showTab = (event, tabId) => {
   // Cập nhật active cho menu
   document.querySelectorAll(".nav-item").forEach((btn) => {
     btn.classList.remove("active");
   });
   event.currentTarget.classList.add("active");
-}
+  switch (tabId) {
+    case "profile":
+      showProfile();
+      break;
+    case "order":
+      showOrderList();
+      break;
+    default:
+  }
+};
+
+const saveInformation = () => {
+  let phoneNumber = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+  let newAccount = { ...account, phoneNumber, address };
+  accountStore.updateAccount(newAccount);
+  showNotifySuccess(showProfile, "Updated information");
+};
+
+const chooseFile = () => {
+  document.getElementById("file-upload").click();
+};
+
+const changeAvatar = (event) => {
+  let file = event.target.files[0];
+  if (file) {
+    let render = new FileReader();
+
+    render.onload = (e) => {
+      let base64String = e.target.result;
+
+      document.getElementById("avatar").src = base64String;
+      accountStore.updateAccount({ ...account, avatar: base64String });
+      updateNavMenu();
+      showNotifySuccess(showProfile, "Updated avatar");
+    };
+
+    render.readAsDataURL(file);
+  }
+};
+
+const logout = () => {
+  Swal.fire({
+    text: "Are you sure logout?!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, Let's logout!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      accountStore.logout();
+      window.location.href = "/login.html";
+    }
+  });
+};

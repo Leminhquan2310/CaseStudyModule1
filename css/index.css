@@ -122,6 +122,7 @@ body {
   font-weight: bold;
   font-size: 1rem;
 }
+.btn_change_info,
 .btn_back_home,
 .product-card .btn_add_cart {
   width: 100px;
@@ -134,13 +135,14 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
+.btn_change_info:hover,
 .btn_back_home:hover,
 .product-card .btn_add_cart:hover {
   background-color: #149a7f;
   transform: translateY(-1px);
 }
 
+.btn_change_info:active,
 .btn_back_home:active,
 .product-card .btn_add_cart:active {
   transform: scale(0.97);
@@ -283,33 +285,71 @@ tfoot td {
 }
 
 /* ----------- profile page */
+.profile_container {
+  display: flex;
+  padding: 2rem;
+}
+
 .sidebar {
   width: 260px;
+  max-height: fit-content;
   background: #2c3e50;
   color: white;
   padding: 30px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-.avatar-section {
-  text-align: center;
-  margin-bottom: 30px;
+.avatar-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 10px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.avatar {
+.avatar-container .avatar {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  margin-bottom: 10px;
-  border: 3px solid #fff;
+  object-fit: cover;
+  border: 3px solid #66a6ff;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 90px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay i {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.avatar-container:hover .overlay {
+  opacity: 1;
 }
 
 .nav {
   width: 100%;
 }
 
+.nav-item-logout,
 .nav-item {
   width: 100%;
   background: transparent;
@@ -321,6 +361,13 @@ tfoot td {
   cursor: pointer;
   transition: background 0.3s;
   border-radius: 6px;
+  margin: 5px 0;
+}
+
+.nav-item-logout:hover,
+.nav-item-logout:active {
+  background: #34495e;
+  color: red;
 }
 
 .nav-item:hover,
@@ -333,6 +380,9 @@ tfoot td {
   flex: 1;
   padding: 40px;
   background: #fff;
+  margin: 0 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 h2 {
@@ -344,15 +394,6 @@ h2 {
 .profile-info p {
   margin: 8px 0;
   font-size: 16px;
-}
-
-/* Tabs */
-.tab {
-  display: none;
-}
-
-.tab.active {
-  display: block;
 }
 
 /* Table */
@@ -387,4 +428,20 @@ th {
 
 .badge.pending {
   background-color: #f39c12;
+}
+
+.input-basic {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-basic:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
 }
