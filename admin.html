@@ -12,6 +12,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
   </head>
   <body>
     <div class="layout">
@@ -27,15 +31,19 @@
           </div>
         </div>
         <ul id="menu">
-          <li><a>Dashboard</a></li>
           <li><a class="active" onclick="showProductManage(event)">Product</a></li>
           <li><a onclick="showCategoryManage(event)">Category</a></li>
           <li><a onclick="showBrandManage(event)">Brand</a></li>
+          <li><a id="orderTab" onclick="showOrderManage(event)">Order</a></li>
         </ul>
       </aside>
       <main id="main-content" class="main-content"></main>
     </div>
 
+    <!-- ----------- script -------------- -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/utils/component.js"></script>
     <script src="js/model/Brand.js"></script>
@@ -46,10 +54,12 @@
     <script src="js/service/ProductService.js"></script>
     <script src="js/service/BrandService.js"></script>
     <script src="js/service/CategoryService.js"></script>
+    <script src="js/service/OrderService.js"></script>
     <script src="js/view/admin/product.js"></script>
     <script src="js/view/admin/category.js"></script>
     <script src="js/view/admin/brand.js"></script>
     <script src="js/view/admin/profile.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/view/admin/order.js"></script>
+    <script src="js/view/admin/main.js"></script>
   </body>
 </html>

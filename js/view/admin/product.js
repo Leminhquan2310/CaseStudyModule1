@@ -7,7 +7,6 @@ const showProductManage = (event) => {
   let maxPrice = productStore.getMaxPrice();
   let maxQuantity = productStore.getMaxQuantity();
   let html = `<h1>PRODUCT MANAGEMENT</h1>
-
         <form id="product-form" onsubmit="addProduct(event)">
           <input type="text" id="product-name" placeholder="Product Name" required />
           <input type="number" id="product-price" min="0" placeholder="Price" required />
@@ -34,14 +33,14 @@ const showProductManage = (event) => {
           </a>
         </form>
 
-        <div>
+        <div class="search_box">
           <input type="text" class="searchInput" id="searchProduct" oninput="searchProduct()" placeholder="Search by name" />
           <div class="filter-container">
             <button class="btn_filter" onclick="toggleFilterPopup()">
               Filter <span class="icSearch"><i class="fa-solid fa-magnifying-glass"></i></span>
             </button>
             <div id="filter-popup" class="filter-popup hidden">
-            <div class="rangeSearch">
+              <div class="rangeSearch">
                 <label>Range Price: $0 to <span id="rangePrice">$${maxPrice}</span></label>
                 0 <input oninput="displayRangePrice(event)" type="range" id="filterPrice" value="${maxPrice}" min="0" max="${maxPrice}"/> ${maxPrice}
                 <label>
@@ -52,7 +51,7 @@ const showProductManage = (event) => {
                 <label>
               </div>
                 <select id="filter-category">
-                  <option value="">-- category --</option>
+                  <option value="">-- all category --</option>
                   ${categoryStore
                     .readCate()
                     .map((item) => `<option value="${item.id}">${item.name}</option>`)
@@ -61,7 +60,7 @@ const showProductManage = (event) => {
               </label>
               <label>
                 <select id="filter-brand">
-                  <option value="">-- brand --</option>
+                  <option value="">-- all brand --</option>
                   ${brandStore
                     .readBrand()
                     .map((item) => `<option value="${item.id}">${item.name}</option>`)
@@ -73,7 +72,7 @@ const showProductManage = (event) => {
             </div>
           </div>
         </div>
-        <table>
+        <table class="product_table">
           <thead>
             <tr>
               <th>Name</th>
@@ -179,8 +178,6 @@ const addProduct = (e) => {
 
 const editProduct = (id) => {
   let data = getElementInput();
-  console.log(Number(data.price.value));
-
   let product = new Product(
     id,
     data.cate.value,

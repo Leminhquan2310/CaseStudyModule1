@@ -148,7 +148,7 @@ form input,
 form select,
 form textarea,
 form button {
-  padding: 12px 15px;
+  padding: 10px 15px;
   border: 1px solid #ccc;
   border-radius: 10px;
   font-size: 14px;
@@ -203,16 +203,17 @@ td {
   border-bottom: 1px solid #eee;
 }
 
-td:first-child {
+.product_table td:first-child {
   display: flex;
   align-items: center;
 }
 
-td:nth-last-child(2),
-td:last-child {
-  width: 100px;
+.product_table td:nth-last-child(2),
+.product_table td:last-child {
+  width: 80px;
 }
 
+.btn_change,
 button.action-btn {
   padding: 6px 12px;
   font-size: 13px;
@@ -220,11 +221,13 @@ button.action-btn {
   border-radius: 6px;
   cursor: pointer;
 }
+
 button.btn_reset,
 button.btn_cancel {
   background-color: #ddd;
   color: #555;
 }
+.btn_change:hover,
 button.btn_reset:hover,
 button.btn_cancel:hover {
   background-color: #ccc;
@@ -250,11 +253,19 @@ button.btn_cancel:hover {
 }
 /* --------------------- */
 
+.search_box {
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+}
+
 .filter-container {
   position: relative;
   display: inline-block;
   margin: 10px 10px;
 }
+
+.btn_save,
 .btn_filter {
   width: 100px;
   height: 40px;
@@ -270,11 +281,13 @@ button.btn_cancel:hover {
   transition: background-color 0.25s, transform 0.1s;
 }
 
+.btn_save:hover,
 .btn_filter:hover {
   background-color: #2980b9; /* đậm hơn khi hover */
   transform: translateY(-1px);
 }
 
+.btn_save:active,
 .btn_filter:active {
   transform: scale(0.97);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -283,8 +296,8 @@ button.btn_cancel:hover {
 .filter-popup {
   position: absolute;
   width: 300px;
-  top: 100%;
-  left: 0;
+  top: 200%;
+  right: 0;
   margin-top: 5px;
   background-color: white;
   border: 1px solid #ccc;
@@ -303,8 +316,14 @@ button.btn_cancel:hover {
 
 .filter-popup select {
   width: 100%;
-  padding: 4px;
-  margin-top: 4px;
+  height: 42px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  transition: all 0.2s;
+  margin: 10px 0;
 }
 
 .hidden {
@@ -313,6 +332,15 @@ button.btn_cancel:hover {
 
 .rangeSearch {
   margin: 10px 0;
+}
+
+input[type="range"] {
+  -webkit-appearance: none; /* Bỏ style mặc định trên Chrome/Safari */
+  width: 200px;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
 }
 
 .btn_reset,
@@ -493,4 +521,222 @@ button.btn_cancel:hover {
   outline: none;
 }
 
-/* ------------------ */
+/* ------------ order page ------ */
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: white;
+}
+
+.badge.Pending {
+  background-color: #f39c12;
+}
+
+.badge.Confirmed {
+  background-color: #3498db;
+}
+
+.badge.Shipping {
+  background-color: #e67e22;
+}
+
+.badge.Delivered {
+  background-color: #2ecc71;
+}
+
+.badge.Canceled {
+  background-color: #e74c3c;
+}
+
+.badge.Returned {
+  background-color: #9b59b6;
+}
+
+/* css modal */
+.modal {
+  display: flex; /* Ẩn mặc định */
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* nền mờ */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Nội dung modal */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 90%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.filterOrder {
+  display: flex;
+  align-items: center;
+}
+
+.filterOrder .selectStatus {
+  width: 200px;
+  height: 60px;
+}
+.modal select,
+.filterOrder select {
+  width: 100%;
+  height: 42px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  transition: all 0.2s;
+  margin: 10px 0;
+}
+
+.modal select:hover,
+.filterOrder select:hover {
+  border-color: #bbb;
+}
+
+.modal select:active .filterOrder select:focus {
+  outline: none;
+  border-color: #2980b9;
+  box-shadow: 0 0 3px rgba(41, 128, 185, 0.4);
+}
+
+/* Nút đóng */
+.close {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* Hiệu ứng */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Thông tin đơn */
+.order-info p {
+  margin: 8px 0;
+}
+
+/* Bảng sản phẩm */
+.product-table {
+  width: 600px;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  color: #000;
+}
+
+.product-table th {
+  background-color: #f2f2f2;
+}
+/* ---------- ------- */
+
+input[type="date"] {
+  appearance: none; /* Ẩn giao diện mặc định trình duyệt (Chrome/Edge) */
+  -webkit-appearance: none; /* Safari */
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #fff;
+  color: #333;
+  width: 220px;
+  transition: border-color 0.3s ease;
+  margin: 10px;
+}
+
+input[type="date"]:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.4);
+}
+
+.order_table table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fafafa;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+.order_table thead {
+  background-color: #1abc9c;
+  color: white;
+  font-weight: 600;
+}
+
+.order_table th,
+.order_table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.order_table tr {
+  cursor: pointer;
+}
+
+.order_table tr:hover {
+  background-color: #eee;
+}
+
+.highlight {
+  background-color: #fffa8b !important; /* nền vàng sáng */
+  animation: pulse 0.4s ease-in-out 3;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0px yellow;
+  }
+  50% {
+    box-shadow: 0 0 15px orange;
+  }
+  100% {
+    box-shadow: 0 0 0px yellow;
+  }
+}

@@ -8,5 +8,6 @@ class Account {
     this.avatar = null;
     this.phoneNumber = "";
     this.address = "";
+    this.message = [];
   }
 }

@@ -66,4 +66,16 @@ class AccountService {
     localStorage.removeItem("auth");
     sessionStorage.removeItem("auth");
   }
+
+  updateMessage(accountId, message) {
+    let index = this.listAccount.findIndex((item) => item.id == accountId);
+    this.listAccount[index].message.push(message);
+    this.storage.saveDataInStorage(this.listAccount);
+  }
+
+  clearMessage(accountId) {
+    let index = this.listAccount.findIndex((item) => item.id === accountId);
+    this.listAccount[index].message = [];
+    this.storage.saveDataInStorage(this.listAccount);
+  }
 }

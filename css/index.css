@@ -205,6 +205,7 @@ body {
   font-size: 1rem;
 }
 
+.btn_cancel,
 .checkout-btn {
   width: 100%;
   margin-top: 1.5rem;
@@ -216,6 +217,19 @@ body {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s;
+}
+
+.btn_cancel {
+  background-color: #ff0048;
+}
+
+.btn_cancel:hover {
+  background-color: #c40138;
+}
+
+.btn_cancel:disabled {
+  background-color: #aaa;
+  cursor: no-drop;
 }
 
 .checkout-btn:hover {
@@ -247,6 +261,7 @@ body {
   margin: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  margin-top: 40px;
 }
 
 .invoice h1 {
@@ -415,6 +430,16 @@ th {
   background: #ecf0f1;
 }
 
+.statusCircle {
+  position: absolute;
+  padding: 0 10px;
+  display: inline-block;
+  width: fit-content;
+  border-radius: 10px;
+  left: 20px;
+  color: #fff;
+}
+
 .badge {
   padding: 4px 10px;
   border-radius: 12px;
@@ -422,11 +447,31 @@ th {
   color: white;
 }
 
-.badge.success {
-  background-color: #27ae60;
+.Pending {
+  background-color: #f39c12;
 }
 
-.badge.pending {
+.Confirmed {
+  background-color: #3498db;
+}
+
+.Shipping {
+  background-color: #e67e22;
+}
+
+.Delivered {
+  background-color: #2ecc71;
+}
+
+.Canceled {
+  background-color: #e74c3c;
+}
+
+.Returned {
+  background-color: #9b59b6;
+}
+
+.pending {
   background-color: #f39c12;
 }
 
@@ -444,4 +489,84 @@ th {
 .input-basic:focus {
   border-color: #4a90e2;
   box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.order_item {
+  cursor: pointer;
+}
+
+.order_item:hover {
+  background-color: #eee;
+}
+
+/* css modal */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* nền mờ */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Nội dung modal */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 90%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Nút đóng */
+.close {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* Hiệu ứng */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.highlight {
+  background-color: #fffa8b !important; /* nền vàng sáng */
+  animation: pulse 0.4s ease-in-out 3;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0px yellow;
+  }
+  50% {
+    box-shadow: 0 0 15px orange;
+  }
+  100% {
+    box-shadow: 0 0 0px yellow;
+  }
 }
